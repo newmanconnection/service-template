@@ -1,4 +1,4 @@
-package org.servantscode.hello.rest;
+package com.newmanconnection.hello.rest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -12,6 +12,10 @@
     </servlet-mapping>
 
     <listener>
-        <listener-class>org.servantscode.hello.db.DBUpgrade</listener-class>
+        <listener-class>com.newmanconnection.hello.db.DBUpgrade</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.newmanconnection.hello.rest.ServiceConfiguration</listener-class>
     </listener>
 </web-app>

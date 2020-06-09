@@ -20,7 +20,7 @@ Verify life at http://localhost/rest
 
 First steps:
 * Create and populate new service repo
-  * Create new repo {new-service} on github (https://github.com/servantscode)
+  * Create new repo {new-service} on github (https://github.com/newmanconnection)
   * Rename your repo locally
 
 * Change project name using quick-start.sh:
@@ -36,7 +36,7 @@ This will update the service name in:
 It will also:
   * Update README.md
   * Change git destination 
-    * git remote set-url origin git@github.com:servantscode/{new-service}.git
+    * git remote set-url origin git@github.com:newmanconnection/{new-service}.git
   * Push template files to repo
     * git push
 

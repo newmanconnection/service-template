@@ -1,8 +1,8 @@
-package org.servantscode.hello.db;
+package com.newmanconnection.hello.db;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.servantscode.commons.db.AbstractDBUpgrade;
+import org.newmanconnection.commons.db.AbstractDBUpgrade;
 
 public class DBUpgrade extends AbstractDBUpgrade {
     private static final Logger LOG = LogManager.getLogger(DBUpgrade.class);

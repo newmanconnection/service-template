@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hello-svc
-        image: servantcode/hello-svc
+        image: newmanconnection/hello-svc
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -31,18 +31,36 @@ spec:
         env:
         - name: ES_JAVA_OPTS 
           value: "-Xmx128m -Xms128m"
+        - name: DB_TYPE
+          valueFrom:
+            secretKeyRef:
+              name: nc-db-config
+              key: db_type
         - name: DB_HOST
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: nc-db-config
+              key: db_host
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: nc-db-config
+              key: db_port
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: db-client-secrets
+              name: nc-db-config
               key: db_user
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: db-client-secrets
+              name: nc-db-config
               key: db_password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: nc-db-config
+              key: db_name
         - name: JWT_KEY
           valueFrom:
             secretKeyRef:
