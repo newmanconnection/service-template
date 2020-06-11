@@ -1,16 +1,20 @@
 package com.newmanconnection.hello.db;
 
+import com.newmanconnection.commons.db.MySqlConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.newmanconnection.commons.db.AbstractDBUpgrade;
-import org.newmanconnection.commons.db.MySqlConnectionFactory;
+import org.servantscode.commons.db.AbstractDBUpgrade;
+import org.servantscode.commons.db.DBAccess;
+import org.servantscode.commons.search.Search;
+
+import static org.servantscode.commons.search.Search.DBType.MYSQL;
 
 
 public class DBUpgrade extends AbstractDBUpgrade {
     private static final Logger LOG = LogManager.getLogger(DBUpgrade.class);
 
     public DBUpgrade() { 
-        DBAccess.setConnectionFactory(new MySqlConnectionFactory()); 
+        DBAccess.setConnectionFactory(new MySqlConnectionFactory());
         Search.setDBType(MYSQL);
     }
 
@@ -18,13 +22,11 @@ public class DBUpgrade extends AbstractDBUpgrade {
     public void doUpgrade() {
         LOG.info("Verifying database structures.");
 
-//        if(!tableExists("departments")) {
-//            LOG.info("-- Created departments table");
-//            runSql("CREATE TABLE departments(id SERIAL PRIMARY KEY, " +
-//                                            "name TEXT, " +
-//                                            "department_head_id INTEGER REFERENCES people(id) ON DELETE SET NULL, " +
-//                                            "org_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE)");
-//        }
+
+
+//        LOG.info("-- Created role table");
+//        if(runSql("CREATE TABLE IF NOT EXISTS role(id INT AUTO_INCREMENT PRIMARY KEY, name TEXT)"))
+//            LOG.info("---- Created role table");
 
     }
 }
