@@ -1,4 +1,4 @@
-package com.newmanconnection.college.rest;
+package com.newmanconnection.hello.rest;
 
 import org.servantscode.commons.rest.AuthFilter;
 import org.servantscode.commons.security.OrganizationContext;
@@ -10,8 +10,6 @@ public class ServiceConfiguration implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent e) {
-        AuthFilter.registerPublicService("college");
-
         OrganizationContext.disableMultiTenancy();
     }
 }

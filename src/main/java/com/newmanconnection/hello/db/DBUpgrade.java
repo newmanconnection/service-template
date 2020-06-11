@@ -3,9 +3,16 @@ package com.newmanconnection.hello.db;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.newmanconnection.commons.db.AbstractDBUpgrade;
+import org.newmanconnection.commons.db.MySqlConnectionFactory;
+
 
 public class DBUpgrade extends AbstractDBUpgrade {
     private static final Logger LOG = LogManager.getLogger(DBUpgrade.class);
+
+    public DBUpgrade() { 
+        DBAccess.setConnectionFactory(new MySqlConnectionFactory()); 
+        Search.setDBType(MYSQL);
+    }
 
     @Override
     public void doUpgrade() {

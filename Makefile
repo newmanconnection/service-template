@@ -70,7 +70,7 @@ publish:
 	docker.exe push $(DOCKER_REPO)/newmanconnection/$(APP_NAME):$(VERSION)
 
 logs: ## Get logs from running container
-	kubectl.exe logs $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -l
+	kubectl.exe logs $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -f
 
 forward: ## Get logs from running container
 	kubectl.exe port-forward $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) 8080
