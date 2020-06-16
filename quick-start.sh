@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $# -eq 0 ]; then
+  echo "Usage: ./quickstart.sh <service-name>"
+  exit 0;
+fi
+
 SERVICE=$1
 echo "Configuring service $SERVICE"
 
@@ -28,6 +33,7 @@ mv src/main/java/com/newmanconnection/hello/db/HelloDB.java src/main/java/com/ne
 mv src/main/java/com/newmanconnection/hello/rest/HelloSvc.java src/main/java/com/newmanconnection/hello/rest/${CAP_SERVICE}Svc.java
 mv src/main/java/com/newmanconnection/hello src/main/java/com/newmanconnection/$SERVICE
 
-git rm quick-start.sh 
+git rm -f quick-start.sh 
 git remote set-url origin git@github.com:newmanconnection/$SERVICE-svc.git
-git push
+git add *
+git commit -m "Service initialized"
