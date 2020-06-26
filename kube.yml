@@ -64,8 +64,13 @@ spec:
         - name: JWT_KEY
           valueFrom:
             secretKeyRef:
-              name: jwt-key
+              name: jwt-config
               key: jwt-key
+        - name: JWT_ISSUER
+          valueFrom:
+            secretKeyRef:
+              name: jwt-config
+              key: jwt-issuer
 ---
 kind: Service
 apiVersion: v1
