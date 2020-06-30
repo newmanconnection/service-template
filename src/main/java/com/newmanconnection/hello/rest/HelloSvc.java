@@ -74,7 +74,7 @@ public class HelloSvc extends SCServiceBase {
     }
 
     @DELETE @Path("/{id}")
-    public void update(@PathParam("id") int id) {
+    public void delete(@PathParam("id") int id) {
         Hello hello = db.get(id);
         if(hello == null)
             throw new NotFoundException();
