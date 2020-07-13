@@ -22,11 +22,9 @@ public class DBUpgrade extends AbstractDBUpgrade {
     public void doUpgrade() {
         LOG.info("Verifying database structures.");
 
-
-
-//        LOG.info("-- Created role table");
-//        if(runSql("CREATE TABLE IF NOT EXISTS role(id INT AUTO_INCREMENT PRIMARY KEY, name TEXT)"))
-//            LOG.info("---- Created role table");
+//        LOG.info("-- Verifying hello table");
+//        if(runSql("CREATE TABLE IF NOT EXISTS hello(id INT AUTO_INCREMENT PRIMARY KEY, name TEXT)"))
+//            LOG.info("---- Created hello table");
 
     }
 }

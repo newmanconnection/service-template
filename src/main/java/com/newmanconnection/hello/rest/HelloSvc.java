@@ -27,50 +27,38 @@ public class HelloSvc extends SCServiceBase {
                                              @QueryParam("sort") @DefaultValue("name") String sort,
                                              @QueryParam("start") @DefaultValue("0") int start,
                                              @QueryParam("count") @DefaultValue("20") int count) {
-        try {
+        return processRequest(() -> {
             int totalResults = db.getCount(search);
 
             List<Hello> results = db.getPage(search, sort, start, count);
 
             return new PaginatedResponse<>(start, count, totalResults, results);
-        } catch(Throwable t) {
-            LOG.error("Could not retrieve hellos", t);
-            throw t;
-        }
+        });
     }
 
     @GET @Path("/{id}") @Produces(APPLICATION_JSON)
     public Hello get(@PathParam("id") int id) {
-        try {
+        return processRequest(() -> {
             return db.get(id);
-        } catch(Throwable t) {
-            LOG.error("Could not retrieve hello by id: " + id, t);
-            throw t;
-        }
+        });
     }
 
     @POST @Consumes(APPLICATION_JSON) @Produces(APPLICATION_JSON)
     public Hello create(Hello hello) {
-        try {
+        return processRequest(() -> {
             return db.create(hello);
-        } catch(Throwable t) {
-            LOG.error("Could not create hello: " + hello.getName(), t);
-            throw t;
-        }
+        });
     }
 
     @PUT @Consumes(APPLICATION_JSON) @Produces(APPLICATION_JSON)
     public Hello update(Hello hello) {
-        try {
+        return processRequest(() -> {
             Hello updated = db.update(hello);
             if(updated == null)
                 throw new NotFoundException();
 
             return updated;
-        } catch(Throwable t) {
-            LOG.error("Could not update hello: " + hello.getName(), t);
-            throw t;
-        }
+        });
     }
 
     @DELETE @Path("/{id}")
@@ -79,11 +67,8 @@ public class HelloSvc extends SCServiceBase {
         if(hello == null)
             throw new NotFoundException();
 
-        try {
+        processRequest(() -> {
             db.delete(id);
-        } catch(Throwable t) {
-            LOG.error("Could not delete hello with id: " + hello.getName(), t);
-            throw t;
-        }
+        });
     }
 }
