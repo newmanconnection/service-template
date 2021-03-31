@@ -27,21 +27,21 @@ help: ## This help.
 # DOCKER TASKS
 # Build the container
 build: bump-version ## Build the container
-	docker.exe build -t newmanconnection/$(APP_NAME) .
-	docker.exe tag newmanconnection/$(APP_NAME) newmanconnection/$(APP_NAME):$(VERSION) 
+	docker build -t newmanconnection/$(APP_NAME) .
+	docker tag newmanconnection/$(APP_NAME) newmanconnection/$(APP_NAME):$(VERSION) 
 
 build-nc: ## Build the container without caching
-	docker.exe build --no-cache -t newmanconnection/$(APP_NAME) .
-	docker.exe tag newmanconnection/$(APP_NAME) newmanconnection/$(APP_NAME):$(VERSION) 
+	docker build --no-cache -t newmanconnection/$(APP_NAME) .
+	docker tag newmanconnection/$(APP_NAME) newmanconnection/$(APP_NAME):$(VERSION) 
 
 run: ## Run container on port configured in `config.env`
-	kubectl.exe create -f kube.yml
+	kubectl create -f kube.yml
 
 update:
-	kubectl.exe set image deployment/$(APP_NAME) $(APP_NAME)=newmanconnection/$(APP_NAME):$(VERSION)
+	kubectl set image deployment/$(APP_NAME) $(APP_NAME)=newmanconnection/$(APP_NAME):$(VERSION)
 
 stop: ## Stop and remove a running container
-	kubectl.exe delete -f kube.yml
+	kubectl delete -f kube.yml
 
 release: bump-patch-version build-nc publish 
 
@@ -64,19 +64,19 @@ bump-version:
 # Docker publish
 publish: 
 	@echo 'publish $(VERSION) to $(DOCKER_REPO)'
-	docker.exe tag newmanconnection/$(APP_NAME) $(DOCKER_REPO)/newmanconnection/$(APP_NAME):$(VERSION)
-	docker.exe tag newmanconnection/$(APP_NAME) $(DOCKER_REPO)/newmanconnection/$(APP_NAME):latest
-	docker.exe push $(DOCKER_REPO)/newmanconnection/$(APP_NAME):latest
-	docker.exe push $(DOCKER_REPO)/newmanconnection/$(APP_NAME):$(VERSION)
+	docker tag newmanconnection/$(APP_NAME) $(DOCKER_REPO)/newmanconnection/$(APP_NAME):$(VERSION)
+	docker tag newmanconnection/$(APP_NAME) $(DOCKER_REPO)/newmanconnection/$(APP_NAME):latest
+	docker push $(DOCKER_REPO)/newmanconnection/$(APP_NAME):latest
+	docker push $(DOCKER_REPO)/newmanconnection/$(APP_NAME):$(VERSION)
 
 logs: ## Get logs from running container
-	kubectl.exe logs $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -f
+	kubectl logs $(shell kubectl get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -f
 
 forward: ## Get logs from running container
-	kubectl.exe port-forward $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) 8080
+	kubectl port-forward $(shell kubectl get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) 8080
 
 prompt: ## Get logs from running container
-	kubectl.exe exec -it $(shell kubectl.exe get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -- /bin/bash
+	kubectl exec -it $(shell kubectl get pods | grep $(APP_NAME) | grep Running | cut -d ' ' -f 1) -- /bin/bash
 
 # HELPERS
 version: ## Output the current version
