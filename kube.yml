@@ -76,6 +76,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hello-svc
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: '/rest/ping'
 spec:
   selector:
     app: hello-svc
