@@ -1,4 +1,6 @@
 # service-template
+# Archived Repo 3/28/2024
+This has been moved to https://github.com/called-io/newman-api
 
 Basic template for a new javabased service in the SC infrastructure. Includes:
 * HelloService
